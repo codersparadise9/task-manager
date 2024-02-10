@@ -13,7 +13,7 @@ export class Datasource {
      readData():Task[]{
         try {
             const jsonData = fs.readFileSync(__dirname+'\\task.json','utf-8');
-            return JSON.parse(jsonData) as Task[];
+            return JSON.parse(jsonData).tasks as Task[];
         }catch (error:any){
             throw new DatasourceConnectionError([{message:error.message}])
         }

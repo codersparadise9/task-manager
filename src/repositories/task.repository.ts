@@ -33,8 +33,16 @@ export class TaskRepository implements AbstractRepository<Task>{
         return this._repository;
     }
 
-    findByID(id: any): Task {
-        return this._repository.filter((repo)=>repo.id === id)[0];
+    findByID(id: any): Task | undefined {
+        let res;
+        this._repository.forEach((task)=>{
+            if(task.id == id){
+                res = task
+            }
+        })
+        if(res)
+            return res;
+        else throw new IdNotFoundError(id)
     }
 
     updateByID(updateDTO: Partial<Task>): Task {
