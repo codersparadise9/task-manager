@@ -7,12 +7,12 @@ export class Datasource {
     private readonly _filePath: string;
 
     constructor(filePath:string) {
-        const pathName = path.join(__dirname, '..', 'config', 'dev', 'foobar.json');
+        const pathName = path.join(__dirname,'.', 'task.json');
         this._filePath = filePath;
     }
      readData():Task[]{
         try {
-            const jsonData = fs.readFileSync('task.json','utf-8');
+            const jsonData = fs.readFileSync(__dirname+'\\task.json','utf-8');
             return JSON.parse(jsonData) as Task[];
         }catch (error:any){
             throw new DatasourceConnectionError([{message:error.message}])
